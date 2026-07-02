@@ -106,12 +106,14 @@ export default function Dashboard({
             const isShortlisted = shortlistIds.has(car.id);
             const isComparing = compareCarIds.includes(car.id);
 
-            // Dynamically assign glow borders based on category
-            let glowClass = '';
-            if (car.category === 'EV' || car.fuelType === 'Hybrid') glowClass = 'card-ev';
-            else if (car.category === 'SUV' || car.category === 'MPV') glowClass = 'card-suv';
-            else if (car.category === 'Coupe' || car.category === 'Sedan') glowClass = 'card-coupe';
-            else if (car.category === 'Pickup') glowClass = 'card-pickup';
+            // Match category colors to indicator dot styles
+            let dotClass = 'dot-sedan';
+            if (car.category === 'EV' || car.fuelType === 'Hybrid') dotClass = 'dot-ev';
+            else if (car.category === 'SUV') dotClass = 'dot-suv';
+            else if (car.category === 'Coupe') dotClass = 'dot-coupe';
+            else if (car.category === 'MPV') dotClass = 'dot-mpv';
+            else if (car.category === 'Hatchback') dotClass = 'dot-hatchback';
+            else if (car.category === 'Pickup') dotClass = 'dot-pickup';
 
             const isBestMatch = index === 0 && car.score >= 80;
             const bestMatchClass = isBestMatch ? 'card-best-match' : '';
@@ -119,36 +121,34 @@ export default function Dashboard({
             return (
               <article 
                 key={car.id} 
-                className={`card ${glowClass} ${bestMatchClass}`} 
+                className={`card ${bestMatchClass}`} 
                 style={{ 
                   display: 'flex', 
                   flexDirection: 'column', 
                   justifyContent: 'space-between', 
                   position: 'relative', 
                   overflow: 'hidden',
-                  borderRadius: '24px',
-                  borderWidth: isBestMatch ? '2px' : '1px'
+                  borderRadius: '20px',
+                  borderWidth: isBestMatch ? '1px' : '1px',
+                  borderColor: isBestMatch ? 'rgba(99, 102, 241, 0.4)' : 'rgba(255,255,255,0.04)'
                 }}
               >
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                     <div>
                       {isBestMatch && (
                         <div style={{ marginBottom: '0.6rem' }}>
                           <span className="best-match-badge">🥇 Best Match</span>
                         </div>
                       )}
-                      <p className="listing-label" style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      <p className="listing-label" style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center' }}>
+                        <span className={`dot-indicator ${dotClass}`} />
                         {car.category} · {car.fuelType}
                       </p>
-                      <h3 style={{ fontSize: '1.4rem', marginTop: '0.2rem', fontWeight: 700 }}>{car.make} {car.model}</h3>
+                      <h3 style={{ fontSize: '1.35rem', marginTop: '0.3rem', fontWeight: 700 }}>{car.make} {car.model}</h3>
                     </div>
-                    <div 
-                      className={`circular-progress ${car.score >= 80 ? 'high-match' : ''}`}
-                      style={{ '--percent': `${car.score}%` } as React.CSSProperties}
-                      title={`Match score: ${car.score}%`}
-                    >
-                      {car.score}%
+                    <div className={`match-badge ${car.score >= 80 ? 'high-match' : ''}`}>
+                      {car.score}% Match
                     </div>
                   </div>
 

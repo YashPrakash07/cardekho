@@ -91,7 +91,7 @@ export default function QuizWizard({ onSubmit, loading = false }: QuizWizardProp
       {
         title: 'Pick your ideal car type',
         render: (
-          <div className="choice-card-grid">
+          <div className="choice-card-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
             {categories.map((category) => {
               const info = categoryInfo[category];
               return (
@@ -99,10 +99,22 @@ export default function QuizWizard({ onSubmit, loading = false }: QuizWizardProp
                   key={category}
                   className={`choice-card ${answers.category === category ? 'selected' : ''}`}
                   onClick={() => setAnswers((prev) => ({ ...prev, category }))}
+                  style={{
+                    padding: '1rem 1.25rem',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    borderRadius: '14px',
+                    background: 'rgba(255, 255, 255, 0.01)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                  }}
                 >
-                  <span className="choice-emoji">{info.emoji}</span>
-                  <span className="choice-label">{category}</span>
-                  <span className="input-label" style={{ fontSize: '0.8rem' }}>{info.desc}</span>
+                  <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{info.emoji}</span>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.92rem', color: '#ffffff' }}>{category}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.1rem' }}>{info.desc}</div>
+                  </div>
                 </div>
               );
             })}
@@ -112,7 +124,7 @@ export default function QuizWizard({ onSubmit, loading = false }: QuizWizardProp
       {
         title: 'Fuel preference',
         render: (
-          <div className="choice-card-grid">
+          <div className="choice-card-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
             {fuelTypes.map((fuel) => {
               const info = fuelInfo[fuel];
               return (
@@ -120,10 +132,22 @@ export default function QuizWizard({ onSubmit, loading = false }: QuizWizardProp
                   key={fuel}
                   className={`choice-card ${answers.fuelType === fuel ? 'selected' : ''}`}
                   onClick={() => setAnswers((prev) => ({ ...prev, fuelType: fuel }))}
+                  style={{
+                    padding: '1rem 1.25rem',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    borderRadius: '14px',
+                    background: 'rgba(255, 255, 255, 0.01)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                  }}
                 >
-                  <span className="choice-emoji">{info.emoji}</span>
-                  <span className="choice-label">{fuel}</span>
-                  <span className="input-label" style={{ fontSize: '0.8rem' }}>{info.desc}</span>
+                  <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{info.emoji}</span>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.92rem', color: '#ffffff' }}>{fuel}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginTop: '0.1rem' }}>{info.desc}</div>
+                  </div>
                 </div>
               );
             })}

@@ -201,12 +201,23 @@ export default function ComparisonBoard({ cars, quizAnswers, onClose, onRemove }
             const isReliabilityWinner = hasCompare && car.reliability === maxReliability;
             const isSeatsWinner = hasCompare && car.seats === maxSeats;
 
+            let dotClass = 'dot-sedan';
+            if (car.category === 'EV' || car.fuelType === 'Hybrid') dotClass = 'dot-ev';
+            else if (car.category === 'SUV') dotClass = 'dot-suv';
+            else if (car.category === 'Coupe') dotClass = 'dot-coupe';
+            else if (car.category === 'MPV') dotClass = 'dot-mpv';
+            else if (car.category === 'Hatchback') dotClass = 'dot-hatchback';
+            else if (car.category === 'Pickup') dotClass = 'dot-pickup';
+
             return (
               <div key={car.id} className="comparison-card highlighted">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', height: '60px' }}>
                   <div>
-                    <span className="listing-label" style={{ fontSize: '0.75rem' }}>{car.category}</span>
-                    <h3 style={{ fontSize: '1.2rem', margin: 0 }}>{car.make} {car.model}</h3>
+                    <span className="listing-label" style={{ fontSize: '0.72rem', display: 'flex', alignItems: 'center' }}>
+                      <span className={`dot-indicator ${dotClass}`} />
+                      {car.category}
+                    </span>
+                    <h3 style={{ fontSize: '1.2rem', margin: '0.1rem 0 0', fontWeight: 700 }}>{car.make} {car.model}</h3>
                   </div>
                   <button 
                     className="tab-button" 
@@ -309,16 +320,14 @@ export default function ComparisonBoard({ cars, quizAnswers, onClose, onRemove }
                     </div>
                   </div>
 
-                  <div className="progress-track" style={{ marginTop: '1rem', height: '10px' }}>
+                  <div className="progress-track" style={{ marginTop: '1rem', height: '4px', background: 'rgba(255, 255, 255, 0.06)' }}>
                     <div 
                       className="progress-fill" 
                       style={{ 
                         width: `${percentage}%`,
-                        background: car.fuelType === 'Electric' 
-                          ? 'linear-gradient(90deg, var(--emerald), #10b981)' 
-                          : car.fuelType === 'Hybrid'
-                          ? 'linear-gradient(90deg, #10b981, var(--blue))'
-                          : 'linear-gradient(90deg, var(--blue), var(--indigo))'
+                        background: car.fuelType === 'Electric' || car.fuelType === 'Hybrid'
+                          ? 'var(--emerald)' 
+                          : 'var(--indigo)'
                       }} 
                     />
                   </div>

@@ -570,104 +570,107 @@ textarea {
   }
 }
 
-/* Card hover scaling and transitions */
+/* Minimal card transitions - no neon glows */
 .card {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease;
+  background: rgba(13, 20, 38, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.005);
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 15px 35px rgba(3, 5, 15, 0.6), 0 0 20px rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* Category Specific Dynamic Glows */
-.card-ev {
-  border-color: rgba(16, 185, 129, 0.15) !important;
+/* Category Specific Dot Indicators */
+.dot-indicator {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
 }
-.card-ev:hover {
-  border-color: rgba(16, 185, 129, 0.4) !important;
-  box-shadow: 0 15px 35px rgba(3, 5, 15, 0.6), 0 0 25px rgba(16, 185, 129, 0.15) !important;
-}
+.dot-ev { background-color: var(--emerald); }
+.dot-suv { background-color: #3b82f6; }
+.dot-coupe { background-color: #f43f5e; }
+.dot-sedan { background-color: #94a3b8; }
+.dot-hatchback { background-color: #a855f7; }
+.dot-mpv { background-color: #06b6d4; }
+.dot-pickup { background-color: var(--warning); }
 
-.card-suv {
-  border-color: rgba(59, 130, 246, 0.15) !important;
-}
-.card-suv:hover {
-  border-color: rgba(59, 130, 246, 0.4) !important;
-  box-shadow: 0 15px 35px rgba(3, 5, 15, 0.6), 0 0 25px rgba(59, 130, 246, 0.15) !important;
-}
-
-.card-coupe {
-  border-color: rgba(239, 68, 68, 0.15) !important;
-}
-.card-coupe:hover {
-  border-color: rgba(239, 68, 68, 0.4) !important;
-  box-shadow: 0 15px 35px rgba(3, 5, 15, 0.6), 0 0 25px rgba(239, 68, 68, 0.15) !important;
-}
-
-.card-pickup {
-  border-color: rgba(245, 158, 11, 0.15) !important;
-}
-.card-pickup:hover {
-  border-color: rgba(245, 158, 11, 0.4) !important;
-  box-shadow: 0 15px 35px rgba(3, 5, 15, 0.6), 0 0 25px rgba(245, 158, 11, 0.15) !important;
-}
-
-/* Best Match Card layout */
+/* Best Match Card highlight - Solid & Sophisticated */
 .card-best-match {
-  background: linear-gradient(135deg, rgba(14, 20, 50, 0.9) 0%, rgba(6, 11, 28, 0.95) 100%) !important;
-  border: 2px solid rgba(99, 102, 241, 0.5) !important;
-  box-shadow: 0 20px 45px rgba(3, 5, 15, 0.7), 0 0 25px rgba(99, 102, 241, 0.18) !important;
+  background: rgba(16, 24, 48, 0.5) !important;
+  border: 1px solid rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.08) !important;
 }
 
 .best-match-badge {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #03050f;
-  font-size: 0.75rem;
-  font-weight: 800;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--warning);
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  padding: 0.35rem 0.85rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 99px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+  gap: 0.25rem;
 }
 
-/* Range Sliders styling */
+/* Minimalist outline match score capsule */
+.match-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(99, 102, 241, 0.04);
+  color: var(--indigo);
+}
+
+.match-badge.high-match {
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.04);
+  color: var(--emerald);
+}
+
+/* iOS-style range sliders */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 6px;
+  height: 4px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 99px;
   outline: none;
-  transition: background 0.15s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #ffffff;
-  border: 4px solid var(--blue-glow);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
-  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.1s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.25);
-  background: #ffffff;
-  border-color: #ffffff;
-  box-shadow: 0 0 16px rgba(99, 102, 241, 0.8);
+  transform: scale(1.15);
 }
+
 
 
